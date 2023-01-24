@@ -38,24 +38,39 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  /** Get details on a company by handle.
+   *
+   * handle: string
+   *
+   * returns: company object
+   */
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  /** Get an array of all companies */
+  /** Get an array of all companies with optional name filter
+   *
+   * nameLike: string
+   *
+   * returns: Array of companies
+   */
 
-  static async getCompanies() {
-    let res = await this.request(`companies`);
+  static async getCompanies(nameLike) {
+    let res = await this.request(`companies`, { nameLike });
     return res.companies;
   }
 
-  /** Get an array of all jobs */
+  /** Get an array of all jobs with optional title filter
+   *
+   * title: string
+   *
+   * returns: Array of jobs
+   */
 
-  static async getJobs() {
-    let res = await this.request(`jobs`);
+  static async getJobs(title) {
+    let res = await this.request(`jobs`, { title });
     return res.jobs;
   }
 }

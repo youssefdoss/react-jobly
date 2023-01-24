@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 
 /** Navigation: Renders nav bar on every page
@@ -8,9 +8,9 @@ import "./Navigation.css";
 function Navigation() {
   return (
     <nav className="nav">
-      <NavLink to="/" end>Jobly</NavLink>
-      <NavLink to="/companies">Companies</NavLink>
-      <NavLink to="/jobs">Jobs</NavLink>
+      <Link to="/">Jobly</Link>
+      <NavLink className="nav-link" to="/companies">Companies</NavLink>
+      <NavLink className="nav-link" to="/jobs">Jobs</NavLink>
     </nav>
   )
 }
