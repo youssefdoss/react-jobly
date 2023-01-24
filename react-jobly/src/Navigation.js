@@ -8,7 +8,7 @@ import "./Navigation.css";
 function Navigation() {
   return (
     <nav className="nav">
-      <NavLink to="/">Jobly</NavLink>
+      <NavLink to="/" end>Jobly</NavLink>
       <NavLink to="/companies">Companies</NavLink>
       <NavLink to="/jobs">Jobs</NavLink>
     </nav>
