@@ -12,21 +12,21 @@ import ProfileForm from "./ProfileForm";
  * Props:
  * - login: Function to login
  * - signup: Function to sign up
- * - applyToJob: Function to apply to a job
+ * - edit: Function to update a user
  *
- * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
+ * JoblyApp -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList, Loginform, SignupForm,ProfileForm }
  */
 // TODO: Route intelligently based on logged in status
-function RoutesList({ login, signup, applyToJob }) {
+function RoutesList({ login, signup, edit }) {
   return (
     <Routes>
       <Route path="/" element={<Homepage />}/>
       <Route path="/companies" element={<CompanyList />}/>
       <Route path="/companies/:handle" element={<CompanyDetail />}/>
       <Route path="/jobs" element={<JobList />}/>
-      <Route path="/login" element={<LoginForm />}/>
-      <Route path="/signup" element={<SignupForm />}/>
-      <Route path="/profile" element={<ProfileForm />}/>
+      <Route path="/login" element={<LoginForm login={login}/>}/>
+      <Route path="/signup" element={<SignupForm signup={signup}/>}/>
+      <Route path="/profile" element={<ProfileForm edit={edit}/>}/>
       <Route path="*" element={<Navigate to="/" />}/>
     </Routes>
   )

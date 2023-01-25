@@ -56,12 +56,11 @@ function JoblyApp() {
   if (user === undefined) return <LoadingSpinner />;
 
   return (
-    <userContext.Provider value={{ user }} >
+    <userContext.Provider value={{ user, applyToJob }} >
       <Navigation logout={logout} />
       <RoutesList
         login={login}
         signup={signup}
-        applyToJob={applyToJob}
       />
     </userContext.Provider>
   )
