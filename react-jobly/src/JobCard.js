@@ -12,8 +12,8 @@ function JobCard({ showCompany, job }) {
     <div className="JobCard">
       <div><p><b>{job.title}</b></p></div>
       <div><p>{showCompany && job.companyName}</p></div>
-      <div><p>{job.salary}</p></div>
-      <div><p>{job.equity}</p></div>
+      <div><p>Salary: {job.salary}</p></div>
+      <div><p>Equity: {job.equity}</p></div>
     </div>
   )
 }

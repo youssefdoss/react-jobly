@@ -12,11 +12,6 @@ const NUMBER_OF_LOGOS = 4;
  */
 function CompanyCard({ company }) {
 
-  /** returns random number between 1-NUMBER_OF_LOGOS */
-  function getRandom() {
-    return Math.ceil(Math.random() * NUMBER_OF_LOGOS);
-  }
-
   return (
     <Link to={`/companies/${company.handle}`} className="CompanyCard">
       <div className="CompanyCard-name">{company.name}</div>
