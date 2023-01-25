@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
-import Navigation from "./Navigation";
-import RoutesList from './RoutesList';
+import JoblyApp from "./JoblyApp";
 
 /** App: Renders jobly app
  *
@@ -11,8 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation />
-        <RoutesList />
+        <JoblyApp />
       </div>
     </BrowserRouter>
   );

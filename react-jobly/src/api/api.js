@@ -58,7 +58,7 @@ class JoblyApi {
    */
 
   static async getCompanies(nameLike) {
-    let res = await this.request(`companies`, { nameLike });
+    let res = await this.request('companies', { nameLike });
     return res.companies;
   }
 
@@ -70,8 +70,66 @@ class JoblyApi {
    */
 
   static async getJobs(title) {
-    let res = await this.request(`jobs`, { title });
+    let res = await this.request('jobs', { title });
     return res.jobs;
+  }
+
+  /** Login user
+   *
+   * data: object - user data {username, password}
+   *
+   * returns: string - token
+   */
+
+  static async login(data) {
+    let res = await this.request('auth/token', data, 'post');
+    return res.token
+  }
+  /** Signup user
+   *
+   * data: object - user data {username, password, firstName, lastName, email}
+   *
+   * returns: string - token
+   */
+
+  static async signup(data) {
+    let res = await this.request('auth/register', data, 'post');
+    return res.token
+  }
+
+  /** Edit user
+   *
+   * data: object - user data {username, password, firstName, lastName, email}
+   *
+   * returns: string - token
+   */
+
+  static async edit(data) {
+    let res = await this.request(`users/${data.username}`, data, 'post');
+    return res.user
+  }
+
+  /** Apply to a job
+   *
+   * data: object - user data {username, password, firstName, lastName, email}
+   *
+   * returns: string - token
+   */
+
+  static async apply(username, jobId) {
+    await this.request(`users/${username}/jobs/${jobId}`, {}, 'post');
+  }
+
+  /** Get current user
+   *
+   * username: string
+   *
+   * returns: object - user object
+   */
+
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
   }
 }
 
