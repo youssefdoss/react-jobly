@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 /** SearchForm: renders search form
  *
- * Props
+ * Props:
  * - search: function called in parent to filter results
  *
  * State:
- * -formData: handles form data for update
+ * - formData: handles form data for update
  *
- * {Companylist, Joblist } --> SearchForm
+ * { Companylist, Joblist } --> SearchForm
  */
 function SearchForm({ search }) {
   const [formData, setFormData] = useState("");
@@ -25,7 +25,7 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <span>
         <input
           type="text"

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../public/logos";
 
 const NUMBER_OF_LOGOS = 4;
 
@@ -26,7 +25,7 @@ function CompanyCard({ company }) {
 
       <div className="CompanyCard-logo">
         <img
-          src={`./logos/logo${getRandom()}.png`}
+          src={company.logoUrl}
           alt={`logo of ${company.name}`}
         />
       </div>
