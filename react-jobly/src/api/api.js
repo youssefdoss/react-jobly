@@ -73,6 +73,9 @@ class JoblyApi {
    */
 
   static async getJobs(title) {
+    if (title === '') {
+      title = undefined
+    }
     let res = await this.request(`jobs`, { title });
     return res.jobs;
   }

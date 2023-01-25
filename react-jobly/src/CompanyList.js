@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
-import CompanyCard from "./CompanyCard";
 import JoblyApi from "./api/api";
+import CompanyCardList from "./CompanyCardList";
+import LoadingSpinner from "./LoadingSpinner";
 
 /** CompanyList: Renders company list page
  *
@@ -10,6 +11,7 @@ import JoblyApi from "./api/api";
  *
  * RoutesList -> CompanyList -> { SearchForm, CompanyCard }
  */
+
 function CompanyList() {
   const [companies, setCompanies] = useState();
 
@@ -22,20 +24,14 @@ function CompanyList() {
     setCompanies(companies);
   }
 
-  if (companies === undefined) return <h1>Loading...</h1>;
+  if (companies === undefined) return <LoadingSpinner />;
 
   return (
     <div className="CompanyList">
       <SearchForm search={search} />
       {companies.length > 0
         ? (
-          <ul>
-            {companies.map(c => (
-              <CompanyCard
-                key={c.handle}
-                company={c} />
-            ))}
-          </ul>
+          <CompanyCardList companies={companies} />
         ) : (
           <p>Sorry, no results were found!</p>
         )}

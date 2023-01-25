@@ -3,7 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 import Navigation from "./Navigation";
 import RoutesList from './RoutesList';
 
-/** TODO: */
+/** App: Renders jobly app
+ *
+ * App -> { Navigation, RoutesList }
+*/
 function App() {
   return (
     <BrowserRouter>

@@ -1,6 +1,14 @@
-/** TODO: Upon fleshing out (just wanted filler components) */
+/** HomePage: renders home page
+ *
+ * RoutesList -> HomePage
+ */
 function Homepage() {
-  return <h1>Homepage</h1>
+  return (
+  <div>
+    <h1>Jobly</h1>
+    <h3>All the jobs in one, convenient place</h3>
+  </div>
+  );
 }
 
 export default Homepage;

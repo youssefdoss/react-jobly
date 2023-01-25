@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NUMBER_OF_LOGOS = 4;
-
 /** CompanyCard: renders individual company card
  *
  * Props:
@@ -18,12 +16,12 @@ function CompanyCard({ company }) {
 
       <div className="CompanyCard-description">{company.description}</div>
 
-      <div className="CompanyCard-logo">
+      {company.logoUrl && <div className="CompanyCard-logo">
         <img
           src={company.logoUrl}
           alt={`logo of ${company.name}`}
         />
-      </div>
+      </div>}
     </Link>
   );
 }
