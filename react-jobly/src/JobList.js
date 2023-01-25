@@ -20,6 +20,13 @@ function JobList() {
 
   /** Sets jobs on search form submission */
   async function search(title) {
+    if (title !== undefined) {
+      title = title.trim();
+    }
+
+    if (title === '') {
+      title = undefined;
+    }
     const jobs = await JoblyApi.getJobs(title);
     setJobs(jobs);
   }

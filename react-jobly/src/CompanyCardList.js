@@ -13,7 +13,7 @@ function CompanyCardList({ companies }) {
     <div>
       {companies.map(company => (
         <CompanyCard
-          key={company.id}
+          key={company.handle}
           company={company}
           />
       ))}

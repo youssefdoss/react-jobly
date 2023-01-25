@@ -20,6 +20,12 @@ function CompanyList() {
   }, []);
 
   async function search(nameLike) {
+    if (nameLike !== undefined) {
+      nameLike = nameLike.trim();
+    }
+    if (nameLike === '') {
+      nameLike = undefined
+    }
     const companies = await JoblyApi.getCompanies(nameLike);
     setCompanies(companies);
   }
