@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 /** Signs up a user
  *
  * Props:
  * - signup: Function to signup
  *
- *
  * State:
  * - formData: state to handle form change.
+ * - errors: Array of errors returned from API
  *
  *  RoutesList -> SignupForm --> Alert
  */
@@ -20,6 +21,7 @@ function SignupForm({ signup }) {
     lastName:"",
     email:""
   });
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -34,8 +36,12 @@ function SignupForm({ signup }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    await signup(formData);
-    navigate("/");
+    try {
+      await signup(formData);
+      navigate("/");
+    } catch (err) {
+      setErrors(err);
+    }
   }
 
   return (
@@ -88,6 +94,8 @@ function SignupForm({ signup }) {
             name="email"
           />
         </div>
+        {errors.length > 0 &&
+          <Alert errors={errors} />}
         <button>Submit</button>
       </form>
     </div>

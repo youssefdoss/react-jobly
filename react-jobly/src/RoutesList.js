@@ -16,7 +16,7 @@ import ProfileForm from "./ProfileForm";
  *
  * JoblyApp -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList, Loginform, SignupForm,ProfileForm }
  */
-// TODO: Route intelligently based on logged in status
+
 function RoutesList({ login, signup, edit }) {
   return (
     <Routes>

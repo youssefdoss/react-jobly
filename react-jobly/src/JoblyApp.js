@@ -6,28 +6,56 @@ import JoblyApi from "./api/api";
 import userContext from "./UserContext";
 import decode from "jwt-decode";
 
-/** TODO: */
+/** JoblyApp: Manages state and context of jobly app
+ *
+ * State:
+ * - user: User object {data, isLoading} (used in context)
+ * - token: String
+ *
+ * JoblyApp -> { Navigation, RoutesList }
+ */
 function JoblyApp() {
-  const [user, setUser] = useState();
-  const [token, setToken] = useState();
+  const [user, setUser] = useState({
+    data: null,
+    isLoading: true,
+  });
+  const [token, setToken] = useState(null);
 
-  useEffect(function loadUser() {
-    async function getUser() {
+  useEffect(function fetchUserWhenMounted() {
+    async function fetchUser() {
+      // Will be helpful when we add localStorage functionality
       if (token) {
-        const { username } = decode(token);
-        JoblyApi.token = token;
-        const user = await JoblyApi.getUser(username);
-        setUser(user);
+        try {
+          const { username } = decode(token);
+          JoblyApi.token = token;
+          const user = await JoblyApi.getUser(username);
+          setUser({
+            data: user,
+            isLoading: false,
+          });
+        } catch (err) {
+          setUser({
+            data: null,
+            isLoading: false,
+          });
+        }
       } else {
-        setUser(null);
+        setUser({
+          user: null,
+          isLoading: false,
+        });
       }
     }
-    getUser();
+    fetchUser();
   }, [token]);
 
   /** Logs user out of application */
   function logout() {
-    setUser(null);
+    // TODO: Are the following four lines unnecessary?
+    // setUser({
+    //   data: null,
+    //   isLoading: false,
+    // });
     setToken(null);
   }
 
@@ -48,15 +76,17 @@ function JoblyApp() {
     const token = await JoblyApi.signup(data);
     setToken(token);
   }
+  // TODO: Make an edit function
+  // TODO: Add application functionality if time
+  // function applyToJob(jobId) {
+  //   JoblyApi.apply(user.username, jobId);
+  // }
 
-  function applyToJob(jobId) {
-    JoblyApi.apply(user.username, jobId);
-  }
-
-  if (user === undefined) return <LoadingSpinner />;
+  if (user.isLoading) return <LoadingSpinner />
 
   return (
-    <userContext.Provider value={{ user, applyToJob }} >
+    <userContext.Provider value={{ user: user.data, /* applyToJob */ }} >
+      {console.log(user)}
       <Navigation logout={logout} />
       <RoutesList
         login={login}

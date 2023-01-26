@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from './Alert';
 
 /** Logins in a user
  *
@@ -9,15 +10,17 @@ import { useNavigate } from "react-router-dom";
  *
  * State:
  * - formData: state to handle form change.
+ * - errors: Array of errors
  *
  *  RoutesList -> LoginForm --> Alert
  */
-//TODO: CREATE ALERT COMPONENT
+
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -31,8 +34,12 @@ function LoginForm({ login }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    await login(formData);
-    navigate("/");
+    try {
+      await login(formData);
+      navigate("/");
+    } catch (err) {
+      setErrors(err);
+    }
   }
 
   return (
@@ -45,17 +52,21 @@ function LoginForm({ login }) {
             type="text"
             value={formData.username}
             onChange={handleChange}
+            name="username"
           />
         </div>
 
         <div>
           <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
             value={formData.password}
             onChange={handleChange}
+            name="password"
           />
         </div>
+        {errors.length > 0
+          && <Alert errors={errors} />}
         <button>Submit</button>
       </form>
     </div>
