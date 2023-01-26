@@ -99,8 +99,8 @@ class JoblyApi {
    * returns: string - token
    */
 
-  static async edit(data) {
-    let res = await this.request(`users/${data.username}`, data, 'post');
+  static async edit(data, username) {
+    let res = await this.request(`users/${username}`, data, 'patch');
     return res.user
   }
 

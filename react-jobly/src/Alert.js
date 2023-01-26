@@ -1,16 +1,16 @@
 /** Alert: Renders alert page for auth
  *
  * Props:
- * - errors: Array of errors to display
+ * - messages: Array of messages to display
  *
  * { LoginForm, SignupForm } -> Alert
  */
 
-function Alert({ errors }) {
+function Alert({ messages }) {
   return (
     <div className="Alert">
-      {errors.map(error => (
-        <p key={error}>{error}</p>
+      {messages.map(message => (
+        <p key={message}>{message}</p>
       ))}
     </div>
   )

@@ -31,7 +31,6 @@ function SignupForm({ signup }) {
       ...fData,
       [name]: value,
     }));
-    console.log("changing");
   }
 
   async function handleSubmit(evt) {

@@ -20,29 +20,26 @@ function JoblyApp() {
     isLoading: true,
     // TODO: Add back in errors and display(?) them in the catch
   });
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
+  // useEffect(function checkLocalStorage() {
+  //   const localStorageToken = localStorage.getItem('token');
+  //   if (localStorageToken) {
+  //     setToken(localStorageToken);
+  //   }
+  // }, []);
 
+  useEffect(function updateLocalStorage() {
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  }, [token])
 
-  // split useeffect to update current user based on token
-  // check if localstorage.token exists on mount,
-  //    if yes, set token to that
-  //    no else case: token will still be null. page will be rendered with no user
-
-  // then upon login, tokenState changes. set localstorage to match token
-  // if localstorageitem to value
-  // else remove localstorage key
-
-
-  // update local storage based on wheter we have a token.
-
-
-  // refactor to updaet and check localstorage.
-  // if token null, dont try it.
   useEffect(function fetchUserWhenMounted() {
     async function fetchUser() {
-      if (token || localStorage.token) {
-        setToken(localStorage.token); // can use .getItem()
+      if (token) {
         try {
           const { username } = decode(token);
           JoblyApi.token = token;
@@ -72,7 +69,6 @@ function JoblyApp() {
   /** Logs user out of application */
   function logout() {
     setToken(null);
-    localStorage.removeItem("token");
   }
 
   /** Logs user into application
@@ -82,7 +78,6 @@ function JoblyApp() {
   async function login(data) {
     const token = await JoblyApi.login(data);
     setToken(token);
-    localStorage.setItem("token", token);
   }
 
   /** Signs user up for application and logs in
@@ -92,9 +87,20 @@ function JoblyApp() {
   async function signup(data) {
     const token = await JoblyApi.signup(data);
     setToken(token);
-    localStorage.setItem("token", token);
   }
-  // TODO: Make an edit function
+
+  /** Edits a user's profile information and updates across the application
+   *
+   * data: {username, firstName, lastName, email}
+   */
+  async function edit(data, username) {
+    const user = await JoblyApi.edit(data, username);
+    setUser(prev => ({
+      ...prev,
+      data: user
+    }));
+  }
+
   // TODO: Add application functionality if time
   // function applyToJob(jobId) {
   //   JoblyApi.apply(user.username, jobId);
@@ -108,6 +114,7 @@ function JoblyApp() {
       <RoutesList
         login={login}
         signup={signup}
+        edit={edit}
       />
     </userContext.Provider>
   )

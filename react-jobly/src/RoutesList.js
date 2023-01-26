@@ -38,7 +38,6 @@ import userContext from "./UserContext";
       )}
       {!user && (
         <>
-        {/* TODO: ask why long briefely flashes before being redirected to homepage  */}
           <Route path="/login" element={<LoginForm login={login} />} />
           <Route path="/signup" element={<SignupForm signup={signup} />} />
         </>
