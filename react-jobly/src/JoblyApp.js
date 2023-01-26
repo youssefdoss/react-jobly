@@ -22,9 +22,27 @@ function JoblyApp() {
   });
   const [token, setToken] = useState(null);
 
+
+
+  // split useeffect to update current user based on token
+  // check if localstorage.token exists on mount,
+  //    if yes, set token to that
+  //    no else case: token will still be null. page will be rendered with no user
+
+  // then upon login, tokenState changes. set localstorage to match token
+  // if localstorageitem to value
+  // else remove localstorage key
+
+
+  // update local storage based on wheter we have a token.
+
+
+  // refactor to updaet and check localstorage.
+  // if token null, dont try it.
   useEffect(function fetchUserWhenMounted() {
     async function fetchUser() {
-      if (token) {
+      if (token || localStorage.token) {
+        setToken(localStorage.token); // can use .getItem()
         try {
           const { username } = decode(token);
           JoblyApi.token = token;
@@ -34,27 +52,27 @@ function JoblyApp() {
             isLoading: false,
           });
         } catch (err) {
-          // When we try to login when the server is off (simulating
-          // a server error), the error doesn't get here because it's thrown
-          // in the api method. Is that appropriate?
-          setUser({
-            data: null,
-            isLoading: false,
-          });
+          resetUser();
         }
       } else {
-        setUser({
-          user: null,
-          isLoading: false,
-        });
+        resetUser();
       }
     }
     fetchUser();
   }, [token]);
 
+  /** Resets user to an initial state */
+  function resetUser() {
+    setUser({
+      data: null,
+      isLoading: false,
+    });
+  }
+
   /** Logs user out of application */
   function logout() {
     setToken(null);
+    localStorage.removeItem("token");
   }
 
   /** Logs user into application
@@ -64,6 +82,7 @@ function JoblyApp() {
   async function login(data) {
     const token = await JoblyApi.login(data);
     setToken(token);
+    localStorage.setItem("token", token);
   }
 
   /** Signs user up for application and logs in
@@ -73,6 +92,7 @@ function JoblyApp() {
   async function signup(data) {
     const token = await JoblyApi.signup(data);
     setToken(token);
+    localStorage.setItem("token", token);
   }
   // TODO: Make an edit function
   // TODO: Add application functionality if time
@@ -84,7 +104,6 @@ function JoblyApp() {
 
   return (
     <userContext.Provider value={{ user: user.data, /* applyToJob */ }} >
-      {console.log(user)}
       <Navigation logout={logout} />
       <RoutesList
         login={login}

@@ -41,7 +41,7 @@ function LoginForm({ login }) {
       setErrors(err);
     }
   }
-
+  //TODO LOADING SPINNER
   return (
     <div>
       <h1>Login</h1>
