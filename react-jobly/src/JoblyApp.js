@@ -18,12 +18,12 @@ function JoblyApp() {
   const [user, setUser] = useState({
     data: null,
     isLoading: true,
+    // TODO: Add back in errors and display(?) them in the catch
   });
   const [token, setToken] = useState(null);
 
   useEffect(function fetchUserWhenMounted() {
     async function fetchUser() {
-      // Will be helpful when we add localStorage functionality
       if (token) {
         try {
           const { username } = decode(token);
@@ -34,6 +34,9 @@ function JoblyApp() {
             isLoading: false,
           });
         } catch (err) {
+          // When we try to login when the server is off (simulating
+          // a server error), the error doesn't get here because it's thrown
+          // in the api method. Is that appropriate?
           setUser({
             data: null,
             isLoading: false,
@@ -51,11 +54,6 @@ function JoblyApp() {
 
   /** Logs user out of application */
   function logout() {
-    // TODO: Are the following four lines unnecessary?
-    // setUser({
-    //   data: null,
-    //   isLoading: false,
-    // });
     setToken(null);
   }
 
