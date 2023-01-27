@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Alert from "./Alert";
+import AlertContainer from "./AlertContainer";
 
 /** Signs up a user
  *
@@ -94,7 +94,7 @@ function SignupForm({ signup }) {
           />
         </div>
         {errors.length > 0 &&
-          <Alert errors={errors} />}
+          <AlertContainer errors={errors} />}
         <button>Submit</button>
       </form>
     </div>

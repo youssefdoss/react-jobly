@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import Alert from "./Alert";
+import AlertContainer from "./AlertContainer";
 import LoadingSpinner from "./LoadingSpinner";
 import userContext from "./UserContext";
 
@@ -83,7 +83,7 @@ function ProfileForm({ edit }) {
           />
         </div>
         {messages.length > 0 &&
-          <Alert messages={messages} />}
+          <AlertContainer messages={messages} />}
         <button>Save Changes</button>
       </form>
     </div>

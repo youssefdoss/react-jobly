@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Alert from './Alert';
+import AlertContainer from "./AlertContainer";
 
 /** Logins in a user
  *
@@ -20,7 +20,11 @@ function LoginForm({ login }) {
     username: "",
     password: "",
   });
-  const [errors, setErrors] = useState([]);
+
+  const [errors, setErrors] = useState({
+    messages: [],
+    type: "danger",
+  });
 
   const navigate = useNavigate();
 
@@ -38,12 +42,16 @@ function LoginForm({ login }) {
       await login(formData);
       navigate("/");
     } catch (err) {
-      setErrors(err);
+      setErrors((prev) => ({
+        ...prev,
+        messages: err,
+      }));
     }
   }
   //TODO LOADING SPINNER
   return (
     <div>
+      {console.log(errors)}
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -65,8 +73,7 @@ function LoginForm({ login }) {
             name="password"
           />
         </div>
-        {errors.length > 0
-          && <Alert errors={errors} />}
+        {errors.messages.length > 0 && <AlertContainer alerts={errors} />}
         <button>Submit</button>
       </form>
     </div>

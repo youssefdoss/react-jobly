@@ -22,13 +22,6 @@ function JoblyApp() {
   });
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  // useEffect(function checkLocalStorage() {
-  //   const localStorageToken = localStorage.getItem('token');
-  //   if (localStorageToken) {
-  //     setToken(localStorageToken);
-  //   }
-  // }, []);
-
   useEffect(function updateLocalStorage() {
     if (token) {
       localStorage.setItem('token', token);
