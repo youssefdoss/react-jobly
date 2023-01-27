@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
-import Homepage from "./Homepage";
-import CompanyList from "./CompanyList";
-import CompanyDetail from "./CompanyDetail";
-import JobList from "./JobList";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import ProfileForm from "./ProfileForm";
-import userContext from "./UserContext";
+import Homepage from "../homepage/Homepage";
+import CompanyList from "../companies/CompanyList";
+import CompanyDetail from "../companies/CompanyDetail";
+import JobList from "../jobs/JobList";
+import LoginForm from "../forms/LoginForm";
+import SignupForm from "../forms/SignupForm";
+import ProfileForm from "../forms/ProfileForm";
+import userContext from "../contexts/UserContext";
 
 /** RoutesList: Renders routes for the whole app
  *

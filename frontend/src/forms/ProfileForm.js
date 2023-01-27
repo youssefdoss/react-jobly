@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import AlertContainer from "./AlertContainer";
-import LoadingSpinner from "./LoadingSpinner";
-import userContext from "./UserContext";
+import AlertContainer from "../common/AlertContainer";
+import LoadingSpinner from "../common/LoadingSpinner";
+import userContext from "../contexts/UserContext";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';

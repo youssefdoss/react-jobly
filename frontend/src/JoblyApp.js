@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import Navigation from "./Navigation";
-import RoutesList from "./RoutesList";
-import LoadingSpinner from "./LoadingSpinner";
+import Navigation from "./route-nav/Navigation";
+import RoutesList from "./route-nav/RoutesList";
+import LoadingSpinner from "./common/LoadingSpinner";
 import JoblyApi from "./api/api";
-import userContext from "./UserContext";
+import userContext from "./contexts/UserContext";
 import decode from "jwt-decode";
 
 /** JoblyApp: Manages state and context of jobly app

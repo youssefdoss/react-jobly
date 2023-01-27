@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import userContext from "./UserContext";
+import userContext from "../contexts/UserContext";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
@@ -15,11 +15,17 @@ import Container from "react-bootstrap/Container";
 function Navigation({ logout }) {
   const { user } = useContext(userContext);
   return (
-    <Navbar bg="light" variant="light" className="nav">
+    <Navbar
+      style={{position: 'sticky', top: 0, zIndex: 10}}
+      bg="light"
+      variant="light"
+      className="nav px-3"
+    >
       <Container>
         <Navbar.Brand href="/">
           Jobly
         </Navbar.Brand>
+      </Container>
 
         {user ? (
           <Nav className="justify-content-end" >
@@ -29,7 +35,7 @@ function Navigation({ logout }) {
 
             <Nav.Link href="/profile">Profile</Nav.Link>
 
-            <Nav.Link onClick={logout}>Log Out {user.username}</Nav.Link>
+            <Nav.Link style={{whiteSpace: 'nowrap'}}onClick={logout}>Log Out {user.username}</Nav.Link>
           </Nav>
         ) : (
           <Nav className="justify-content-end">
@@ -38,7 +44,6 @@ function Navigation({ logout }) {
             <Nav.Link href="/signup">Sign Up</Nav.Link>
           </Nav>
         )}
-      </Container>
     </Navbar>
   );
 }

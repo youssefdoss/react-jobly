@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import SearchForm from "./SearchForm";
-import JoblyApi from "./api/api";
+import SearchForm from "../common/SearchForm";
+import JoblyApi from "../api/api";
 import CompanyCardList from "./CompanyCardList";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../common/LoadingSpinner";
 import Container from 'react-bootstrap/Container';
+import AlertContainer from "../common/AlertContainer";
 
 /** CompanyList: Renders company list page
  *
@@ -40,7 +41,10 @@ function CompanyList() {
         ? (
           <CompanyCardList companies={companies} />
         ) : (
-          <p>Sorry, no results were found!</p>
+          <AlertContainer alerts={{
+            messages: ['Sorry, no results found!'],
+            type: 'danger'
+        }}/>
         )}
     </Container>
   )

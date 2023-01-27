@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import JoblyApi from "./api/api";
-import JobCardList from "./JobCardList";
-import LoadingSpinner from "./LoadingSpinner";
+import JoblyApi from "../api/api";
+import JobCardList from "../jobs/JobCardList";
+import LoadingSpinner from "../common/LoadingSpinner";
 import Container from "react-bootstrap/Container";
 
 /** CompanyDetail: Renders page containing company info and jobs
@@ -26,9 +26,10 @@ function CompanyDetail() {
   if (company === undefined) return <LoadingSpinner />;
 
   return (
-<Container className="col-10 col-sm-8 col-md-6 mt-3">
-  <h2>{company.name} </h2>
-    <div>
+<Container
+  className="col-10 col-sm-8 col-md-6 mt-3">
+  <h2 style={{color: 'white'}}>{company.name} </h2>
+    <div style={{color: 'white'}}>
       {company.description}
     </div>
 
