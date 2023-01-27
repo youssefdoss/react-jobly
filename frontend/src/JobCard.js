@@ -1,3 +1,5 @@
+import Card from 'react-bootstrap/card';
+
 /** JobCard: Renders a job card
  *
  * Props:
@@ -9,13 +11,17 @@
 
 function JobCard({ showCompany, job }) {
   return (
-    <div className="JobCard">
-      <div><p><b>{job.title}</b></p></div>
-      <div><p>{showCompany && job.companyName}</p></div>
-      {job.salary && <div><p>Salary: {job.salary}</p></div>}
-      {job.equty !== null && <div><p>Equity: {job.equity}</p></div>}
+    <div className="mt-3 row d-flex justify-content-center">
+      <Card className="my-2">
+        <Card.Body>
+          <Card.Title>{job.title}</Card.Title>
+          {showCompany && <Card.Text>{job.companyName}</Card.Text>}
+          {job.salary && <Card.Text>Salary: {job.salary}</Card.Text>}
+          {job.equity && <Card.Text>Equity: {job.equity}</Card.Text>}
+        </Card.Body>
+      </Card>
     </div>
-  )
+  );
 }
 
 export default JobCard;

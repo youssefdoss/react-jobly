@@ -11,13 +11,11 @@ import Alert from "react-bootstrap/Alert";
 function AlertContainer({ alerts }) {
   return (
     <>
-      {console.log("Alertcomp: ", alerts.messages)}
-      <Alert key={"primary"} variant={"primary"}>Hello world</Alert>
-      {/* {alerts.messages.map((message) => (
-        <Alert key={message} variant={alerts.type}>
+      {alerts.messages.map((message) => (
+        <Alert className="my-3" key={message} variant={alerts.type}>
           {message}
         </Alert>
-      ))} */}
+      ))}
     </>
   );
 }

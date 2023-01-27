@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm";
 import JoblyApi from "./api/api";
 import CompanyCardList from "./CompanyCardList";
 import LoadingSpinner from "./LoadingSpinner";
+import Container from 'react-bootstrap/Container';
 
 /** CompanyList: Renders company list page
  *
@@ -33,7 +34,7 @@ function CompanyList() {
   if (companies === undefined) return <LoadingSpinner />;
 
   return (
-    <div className="CompanyList">
+    <Container className="col-10 col-sm-8 col-md-6">
       <SearchForm search={search} />
       {companies.length > 0
         ? (
@@ -41,7 +42,7 @@ function CompanyList() {
         ) : (
           <p>Sorry, no results were found!</p>
         )}
-    </div>
+    </Container>
   )
 }
 

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/button";
 
 /** SearchForm: renders search form
  *
@@ -25,18 +27,18 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <span>
-        <input
-          type="text"
+    <div className="row d-flex justify-content-center mt-5">
+      <Form onSubmit={handleSubmit} className="d-flex justify-content-center">
+        <Form.Control
+          type="search"
           placeholder="Enter Search Term..."
           value={formData}
           name="formData"
           onChange={handleChange}
         />
-        <button>Submit</button>
-      </span>
-    </form>
+        <Button variant="primary">Submit</Button>
+      </Form>
+    </div>
   );
 }
 

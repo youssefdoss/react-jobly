@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import AlertContainer from "./AlertContainer";
 import LoadingSpinner from "./LoadingSpinner";
 import userContext from "./UserContext";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 /** Updates a user
  *
@@ -10,7 +13,7 @@ import userContext from "./UserContext";
  *
  * State:
  * - formData: state to handle form change.
- * - messages: Array of messages to be displayed in Alert
+ * - alerts: Object of alert messages and type
  *
  *  RoutesList -> ProfileForm --> Alert
  */
@@ -21,7 +24,10 @@ function ProfileForm({ edit }) {
     lastName: user.lastName,
     email: user.email
   });
-  const [messages, setMessages] = useState([]);
+  const [alerts, setAlerts] = useState({
+    messages: [],
+    type: null
+  });
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -35,58 +41,112 @@ function ProfileForm({ edit }) {
     evt.preventDefault();
     try {
       await edit(formData, user.username);
-      setMessages(['Updated Successfully'])
+      setAlerts({
+        messages: ['Updated Successfully'],
+        type: 'success'
+      });
     } catch (err) {
-      setMessages(err);
+      setAlerts({
+        messages: err,
+        type: 'danger'
+      });
     }
   }
 
   if (!user) return <LoadingSpinner />
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            disabled
-            placeholder={user.username}
-            name="username"
-          />
-        </div>
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            value={formData.firstName}
-            onChange={handleChange}
-            name="firstName"
-          />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            value={formData.lastName}
-            onChange={handleChange}
-            name="lastName"
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            value={formData.email}
-            onChange={handleChange}
-            name="email"
-          />
-        </div>
-        {messages.length > 0 &&
-          <AlertContainer messages={messages} />}
-        <button>Save Changes</button>
-      </form>
+    <div className="mt-3 row d-flex justify-content-center">
+      <div className="col-10 col-sm-8 col-md-6">
+        <Card className="p-3">
+          <h1 className="text-center">Profile</h1>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="username">Username</Form.Label>
+              <Form.Control
+                placeholder={user.username}
+                name="username"
+                disabled
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="firstName">First Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.firstName}
+                onChange={handleChange}
+                name="firstName"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="lastName">Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.lastName}
+                onChange={handleChange}
+                name="lastName"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="email">Email</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.email}
+                onChange={handleChange}
+                name="email"
+              />
+            </Form.Group>
+            {alerts.messages.length > 0 && <AlertContainer alerts={alerts} />}
+            <Button variant="primary" type="submit">
+              Save Changes
+            </Button>
+          </Form>
+        </Card>
+      </div>
     </div>
+    // <div>
+    //   <h1>Profile</h1>
+    //   <form onSubmit={handleSubmit}>
+    //     <div>
+    //       <label htmlFor="username">Username</label>
+    //       <input
+    //         disabled
+    //         placeholder={user.username}
+    //         name="username"
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="firstName">First Name</label>
+    //       <input
+    //         type="text"
+    //         value={formData.firstName}
+    //         onChange={handleChange}
+    //         name="firstName"
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="lastName">Last Name</label>
+    //       <input
+    //         type="text"
+    //         value={formData.lastName}
+    //         onChange={handleChange}
+    //         name="lastName"
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="email">Email</label>
+    //       <input
+    //         type="text"
+    //         value={formData.email}
+    //         onChange={handleChange}
+    //         name="email"
+    //       />
+    //     </div>
+    //     {alerts.messages.length > 0 &&
+    //       <AlertContainer alerts={alerts} />}
+    //     <button>Save Changes</button>
+    //   </form>
+    // </div>
   );
 }
 

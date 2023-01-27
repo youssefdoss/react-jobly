@@ -5,12 +5,14 @@ import React from 'react'
  *
  * Props:
  * - jobs: array of job objects
+ * - showCompany: Boolean to determine if jobCard
+ * should include company name
  *
  *
  *  {CompanyDetail, Joblist} -> JobCardList -> JobCard
  */
 
-function JobCardList({jobs}) {
+function JobCardList({jobs, showCompany}) {
 
   return (
     <div>
@@ -18,6 +20,7 @@ function JobCardList({jobs}) {
         <JobCard
           key={job.id}
           job={job}
+          showCompany={showCompany}
           />
       ))}
     </div>

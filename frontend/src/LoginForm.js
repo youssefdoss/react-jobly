@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertContainer from "./AlertContainer";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 /** Logins in a user
  *
@@ -50,32 +53,36 @@ function LoginForm({ login }) {
   }
   //TODO LOADING SPINNER
   return (
-    <div>
-      {console.log(errors)}
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            name="username"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            name="password"
-          />
-        </div>
-        {errors.messages.length > 0 && <AlertContainer alerts={errors} />}
-        <button>Submit</button>
-      </form>
+    <div className="mt-3 row d-flex justify-content-center">
+      <div className="col-10 col-sm-8 col-md-6">
+        <Card className="p-3">
+          <h1 className="text-center">Login</h1>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="username">Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.username}
+                onChange={handleChange}
+                name="username"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="password">Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                name="password"
+              />
+            </Form.Group>
+            {errors.messages.length > 0 && <AlertContainer alerts={errors} />}
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 }

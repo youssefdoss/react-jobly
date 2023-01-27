@@ -3,6 +3,7 @@ import JobCardList from "./JobCardList";
 import SearchForm from "./SearchForm";
 import JoblyApi from "./api/api";
 import LoadingSpinner from "./LoadingSpinner";
+import Container from 'react-bootstrap/Container';
 
 /** JobList: Renders list of all jobs page
  *
@@ -34,12 +35,12 @@ function JobList() {
   if (jobs === undefined) return <LoadingSpinner />;
 
   return (
-    <div className="JobList">
+    <Container className="col-10 col-sm-8 col-md-6">
       <SearchForm search={search} />
       {jobs.length > 0
-        ? <JobCardList jobs={jobs} />
+        ? <JobCardList jobs={jobs} showCompany={true} />
         : <p>Sorry, no results were found!</p>}
-    </div>
+    </Container>
   )
 }
 
