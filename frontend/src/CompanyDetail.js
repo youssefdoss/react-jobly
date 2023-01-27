@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import JoblyApi from "./api/api";
 import JobCardList from "./JobCardList";
 import LoadingSpinner from "./LoadingSpinner";
+import Container from "react-bootstrap/Container";
 
 /** CompanyDetail: Renders page containing company info and jobs
  *
@@ -25,14 +26,15 @@ function CompanyDetail() {
   if (company === undefined) return <LoadingSpinner />;
 
   return (
-    <div className="CompanyDetail">
-      <h2>{company.name} </h2>
-      <div>
-        {company.description}
-      </div>
-
-      <JobCardList jobs={company.jobs} />
+<Container className="col-10 col-sm-8 col-md-6 mt-3">
+  <h2>{company.name} </h2>
+    <div>
+      {company.description}
     </div>
+
+    <JobCardList jobs={company.jobs} />
+
+</Container>
   );
 }
 

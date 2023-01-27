@@ -1,7 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import userContext from "./UserContext";
-import "./Navigation.css";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
 
 /** Navigation: Renders nav bar on every page with varying displays
  * depending on if user is logged in
@@ -14,23 +15,33 @@ import "./Navigation.css";
 function Navigation({ logout }) {
   const { user } = useContext(userContext);
   return (
-    <nav className="nav">
-      <Link to="/">Jobly</Link>
-      {user ? (
-        <>
-          <NavLink className="nav-link" to="/companies">Companies</NavLink>
-          <NavLink className="nav-link" to="/jobs">Jobs</NavLink>
-          <NavLink className="nav-link" to="/profile">Profile</NavLink>
-          <NavLink className="nav-link" onClick={logout}>Log out {user.username}</NavLink>
-        </>
-      ) : (
-        <>
-          <NavLink className="nav-link" to="/login">Log In</NavLink>
-          <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
-        </>
-      )}
-    </nav>
-  )
+    <Navbar bg="light" variant="light" className="nav">
+      <Container>
+        <Navbar.Brand href="/">
+          Jobly
+        </Navbar.Brand>
+
+        {user ? (
+          <Nav className="justify-content-end" >
+            <Nav.Link href="/companies">Companies</Nav.Link>
+
+            <Nav.Link href="/jobs">Jobs</Nav.Link>
+
+            <Nav.Link href="/profile">Profile</Nav.Link>
+
+            <Nav.Link onClick={logout}>Log Out {user.username}</Nav.Link>
+          </Nav>
+        ) : (
+          <Nav className="justify-content-end">
+            <Nav.Link href="/login"> Log In</Nav.Link>
+
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+          </Nav>
+        )}
+      </Container>
+    </Navbar>
+  );
 }
 
 export default Navigation;
+
