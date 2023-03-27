@@ -103,6 +103,7 @@ To run the rests:
 
 ## Front End Project Structure
 
+```
 public\         # Public folder
 |--logos\       # Generic company logos
 src\
@@ -115,3 +116,4 @@ src\
 |--jobs\        # Job components
 |--route-nav\   # Routes and navbar
 |--JoblyApp\    # Brain component
+```
