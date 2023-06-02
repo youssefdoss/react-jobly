@@ -1,4 +1,4 @@
-# Jobly Backend
+# Jobly
 
 This is the full-stack Jobly (job search) application. This project builds a RESTful job search API using Node.js, Express, and PostgreSQL on the back end. On the front end, it builds a React UI using the aforementioned back end.
 
