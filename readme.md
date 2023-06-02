@@ -6,7 +6,7 @@ This is the full-stack Jobly (job search) application. This project builds a RES
 
 ## Back End Table of Contents
 
-- [Back End Manual Installation](#back-end-project-structure)
+- [Back End Manual Installation](#back-end-manual-installation)
 - [Back End Commands](#back-end-commands)
 - [Project Structure](#back-end-project-structure)
 - [API Endpoints](#api-endpoints)
